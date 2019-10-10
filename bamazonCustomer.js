@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   // Your password
   password: "Ambarqui5!",
   database: "bamazon_db"
-})
+});
 // call back 
 connection.connect(function (err) {
   if (err) throw err;
@@ -18,7 +18,7 @@ connection.connect(function (err) {
   console.log("WELCOME TO BAMAZON!");
   console.log("*******************");
   makeTable();
-})
+});
 
 var makeTable = function () {
   connection.query("SELECT * FROM products", function (err,res){
