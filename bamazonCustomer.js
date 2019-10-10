@@ -1,5 +1,5 @@
 var inquirer = require("inquirer");
-var mysql = require("mysql");
+var mysql = require ("mysql");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -9,10 +9,9 @@ var connection = mysql.createConnection({
   user: "root",
   // Your password
   password: "Ambarqui5!",
-  database: "bamazon"
+  database: "bamazon_db"
 })
-
-//call back 
+// call back 
 connection.connect(function (err) {
   if (err) throw err;
   console.log("*******************");
@@ -20,9 +19,10 @@ connection.connect(function (err) {
   console.log("*******************");
   makeTable();
 })
+
 var makeTable = function () {
-  connection.query("SELECT * FROM products", function (err, res) {
-    for (var i = 0; i < res.lenght; i++) {
+  connection.query("SELECT * FROM products", function (err,res){
+    for (var i=0; i<res.lenght; i++){
       console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || " + res[i].price + " || " + res[i].stockquantity + "/n");
     }
     promptCustomer(res);
@@ -74,4 +74,4 @@ var promptCustomer = function (res) {
     }
     
   })}
-    
+
