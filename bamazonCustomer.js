@@ -22,8 +22,8 @@ connection.connect(function (err) {
 
 var makeTable = function () {
   connection.query("SELECT * FROM products", function (err,res){
-    for (var i=0; i<res.lenght; i++){
-      console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || " + res[i].price + " || " + res[i].stockquantity + "/n");
+    for (var i=0; i<res.length; i++){
+      console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || " + res[i].price + " || " + res[i].stockquantity + "");
     }
     promptCustomer(res);
   })
@@ -39,7 +39,7 @@ var promptCustomer = function (res) {
     if (answer.choice.toUpperCase() == "Q") {
       process.exit();
     }
-    for (var i = 0; i < res.lenght; i++) {
+    for (var i = 0; i < res.length; i++) {
       if (res[i].productname == answer.choice) {
         correct = true;
         var product = answer.choice;
@@ -68,7 +68,7 @@ var promptCustomer = function (res) {
         })
       }
     }
-    if (i == res.lenght && correct == false) {
+    if (i == res.length && correct == false) {
       console.log("Not a valid selection!");
       promptCustomer(res);
     }

@@ -53,15 +53,15 @@ function promptMan()
 function showItems() {
     connection.query("SELECT * FROM products", function (err, results) {
         console.log("");
-        for (var i = 0; i < results.length; i++) {
+        for (var i = 0; i < results.length; i++)
             console.log(
                 results[i].itemid +
                 " | " + results[i].productname +
                 " | $" + results[i].price);
         }
         promptMan();
-    });
-}
+    };
+
 
 function viewLowInv() {
     connection.query("SELECT * FROM products WHERE stockquantity < 5", function (err, results) {
