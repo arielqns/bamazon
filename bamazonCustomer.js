@@ -14,9 +14,11 @@ var connection = mysql.createConnection({
 // call back 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log("*******************");
+  console.log("********************");
   console.log("WELCOME TO BAMAZON!");
-  console.log("*******************");
+  console.log("********************");
+  console.log("Make your selection from the chart below:");
+  console.log("-----------------------------------------");
   makeTable();
 });
 
@@ -24,6 +26,7 @@ var makeTable = function () {
   connection.query("SELECT * FROM products", function (err,res){
     for (var i=0; i<res.length; i++){
       console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || " + res[i].price + " || " + res[i].stockquantity + "");
+      console.log("-----------------------------------------");
     }
     promptCustomer(res);
   })
