@@ -1,13 +1,12 @@
-Name
-# bamazon
+# <strong>bamazon</strong>
 
-# Link
-Deployment Link: https://arielqns.github.io/bamazon/
-GitHub Resipository Link: https://github.com/arielqns/bamazon
-Link to video: 
+# Links
+- Deployment Link: https://arielqns.github.io/bamazon/
+- GitHub Resipository Link: https://github.com/arielqns/bamazon
+- Link to video: 
 
 # Created by
-Ariel Quinones Octomber 2019
+Ariel Quinones, Octomber 2019
 
 # Description
 Bamazon combines Node.js command line interface with MySQL database to create an storefront Amazon-like application. The USERS (customer, manager, or supervisor) interact with the store through a system of commands.
@@ -25,7 +24,7 @@ https://github.com/arielqns/bamazon
 - Set up MySQL database
     Use data from schema.sql
 
-<strong>Customer View</strong>
+- <strong>Customer View</strong>
     1. Open up terminal
     2. Use bash command cd to direct to your local repo folder
     3. In terminal enter node bamazonCustomer.js
@@ -41,21 +40,21 @@ https://github.com/arielqns/bamazon
     8. After each purchase, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
     9. If you select no, connection to your MySQL ends
 
-<strong>Manager View</strong>
+- <strong>Manager View</strong>
     1. Open up terminal
     2. Use bash command cd to direct to your local repo folder
     3. In terminal enter node bamazonManager.js
     4. You will see connected as id in your terminal window to indicate successful connection to MySQL
     connection.connect(function(err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId); 
-  manage();
-});
+    if (err) throw err;
+     console.log("connected as id " + connection.threadId); 
+     manage();
+    });
     5. You will then be prompted 4 options:
-- View Products
-- View Low Inventory
-- Add to Inventory
-- Add New Products
+        - View Products
+        - View Low Inventory
+        - Add to Inventory
+        - Add New Products
     6. View Low Inventory option displays items with quantity < 5
     7. Add New Products will prompt the user to select a department. Note that this a rawlist so option selection must be done through the number keys.
     8. After each manage, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
