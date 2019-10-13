@@ -45,7 +45,7 @@ function promptMan()
                 addNew();
                 break;
             case  "Exit":
-                end();
+                connection.end();
                 break;
 
         };

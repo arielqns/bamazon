@@ -14,43 +14,55 @@ Bamazon combines Node.js command line interface with MySQL database to create an
 
 
 # Instructions:
-- Open liri-node-app file in your terminal
+- Git clone in your local git repo
+https://github.com/arielqns/bamazon
 
-- Provide one of the four commands with a parameter:
-a. node liri.js concert-this <artist/band name here>'
-b. node liri.js spotify-this-song '<song name here>'
-c. node liri.js movie-this '<movie name here>'
-d. node liri.js do-what-it-says 
+- NPM Install Dependencies
+    1. Inquirer
+    2. MySQL 
+    3. DotEnv
 
-- Execute to see a list of results
- a. for concerts you will see:
- Name of Venue
- Venue Location 
- Dates
+- Set up MySQL database
+    Use data from schema.sql
 
- b. for songs you will see:
- Artist(s)
- Song Name
- Preview link of the song from Spotify
- The album that the song is from
+<strong>Customer View</strong>
+    1. Open up terminal
+    2. Use bash command cd to direct to your local repo folder
+    3. In terminal enter node bamazonCustomer.js
+    4. You will see connected as id in your terminal window to indicate successful connection to MySQL
+	connection.connect(function(err) {
+	  if (err) throw err;
+	  console.log("connected as id " + connection.threadId); 
+	  purchase();
+	});
+    5. Enter the Item Id (table's first column) of the product you wish to purchase
+    6. Then you will be prompted to enter the quantity of products you wish to purchase
+    7. Next either your purchase total or an alert of insufficient inventory will display
+    8. After each purchase, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
+    9. If you select no, connection to your MySQL ends
 
- c. for movies you will see:
- Title
- Released year
- IMDB rating
- Rotten Tomatoes Rating
- Country where it was produced
- Language
- Plot
- Actors
-
- d. for command do-what-it-says, it will pick text from random.txt and return back information about songs with that title. 
-
-
-- Information will be log in the log.txt file
-
+<strong>Manager View</strong>
+    1. Open up terminal
+    2. Use bash command cd to direct to your local repo folder
+    3. In terminal enter node bamazonManager.js
+    4. You will see connected as id in your terminal window to indicate successful connection to MySQL
+    connection.connect(function(err) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId); 
+  manage();
+});
+    5. You will then be prompted 4 options:
+- View Products
+- View Low Inventory
+- Add to Inventory
+- Add New Products
+    6. View Low Inventory option displays items with quantity < 5
+    7. Add New Products will prompt the user to select a department. Note that this a rawlist so option selection must be done through the number keys.
+    8. After each manage, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
+    9. If you select no, connection to your MySQL ends
 
 
 
 # Created using: 
-Javascript, Node.js, NPM packages: Axios, Node-Spotify-API, Request, Moment, DotEnv. Bands in Town and OMDB APIs. 
+Javascript, Node.js, MySQL, NPM packages: Inquirer, MySQL, DotEnv. 
+
