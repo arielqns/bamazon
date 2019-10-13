@@ -3,7 +3,7 @@
 # Links
 - Deployment Link: https://arielqns.github.io/bamazon/
 - GitHub Resipository Link: https://github.com/arielqns/bamazon
-- Link to video: 
+- Link to video: https://drive.google.com/file/d/13Q5Tb85Bw4-zPdlPriWdZxGGLg1GFNjB/view?usp=sharing
 
 # Created by
 Ariel Quinones, Octomber 2019
@@ -26,7 +26,7 @@ https://github.com/arielqns/bamazon
 
 - <strong>For Customer View</strong>
     1. Open bamazonCostumer.js in terminal.
-    2. Update your MySQL password on line 11. 
+    2. You may need to update your MySQL password on line 11.  
     3. Enter node bamazonCustomer.js to see Products Chart.
     4. Enter the ID (1st column) of the product you wish to purchase. Or type Q to exit.
     5. Then enter the quantity of products you wish to purchase.
@@ -37,7 +37,7 @@ https://github.com/arielqns/bamazon
 
 - <strong>Manager View</strong>
     1. Open bamazonManager.js in terminal.
-    2. Update your MySQL password on line 11. 
+    2. You may need to update your MySQL password on line 11. 
     3. Enter node bamazonManager.js
     4. After a "HELLO MANAGER!" greeting, You will then be prompted with 4 options (use arrow keys to select):
         - View Products for Sale:
