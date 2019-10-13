@@ -19,13 +19,15 @@ connection.connect(function (err) {
   console.log("*******************");
   console.log("Make your selection from the chart below:");
   console.log("-----------------------------------------");
+  console.log("ID||Prod.Name||  Dep || Price ||Inventory");
+  console.log("-----------------------------------------");
   makeTable();
 });
 
 var makeTable = function () {
   connection.query("SELECT * FROM products", function (err,res){
     for (var i=0; i<res.length; i++){
-      console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || " + res[i].price + " || " + res[i].stockquantity + "");
+      console.log(res[i].itemid + " || " + res[i].productname + " || " + res[i].departmentname + " || $" + res[i].price + "   || " + res[i].stockquantity + "");
       console.log("-----------------------------------------");
     }
     promptCustomer(res);
@@ -43,7 +45,7 @@ var promptCustomer = function (res) {
       process.exit();
     }
     for (var i = 0; i < res.length; i++) {
-      if (res[i].productname == answer.choice) {
+      if (res[i].itemid == answer.choice) {
         correct = true;
         var product = answer.choice;
         var id = i;
@@ -61,7 +63,9 @@ var promptCustomer = function (res) {
         }).then(function (answer) {
           if ((res[id].stockquantity - answer.quant) > 0) {
             connection.query("UPDATE products SET stockquantity='" + (res[id].stockquantity - answer.quant) + "' WHERE productname='" + product + "'", function (err, res) {
+              console.log("-----------------------------------------");
               console.log("Product Bought!");
+              console.log("-----------------------------------------");
               makeTable();
             })
           } else {

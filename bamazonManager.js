@@ -56,7 +56,6 @@ function showItems() {
     connection.query("SELECT * FROM products", function (err, results) {
         console.log("");
         for (var i = 0; i < results.length; i++) {
-            console.log(
                 results[i].itemid +
                 " | " + results[i].productname +
                 " | " + results[i].departmentname +

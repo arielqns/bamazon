@@ -24,41 +24,36 @@ https://github.com/arielqns/bamazon
 - Set up MySQL database
     Use data from schema.sql
 
-- <strong>Customer View</strong>
-    1. Open up terminal
-    2. Use bash command cd to direct to your local repo folder
-    3. In terminal enter node bamazonCustomer.js
-    4. You will see connected as id in your terminal window to indicate successful connection to MySQL
-	connection.connect(function(err) {
-	  if (err) throw err;
-	  console.log("connected as id " + connection.threadId); 
-	  purchase();
-	});
-    5. Enter the Item Id (table's first column) of the product you wish to purchase
-    6. Then you will be prompted to enter the quantity of products you wish to purchase
-    7. Next either your purchase total or an alert of insufficient inventory will display
-    8. After each purchase, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
-    9. If you select no, connection to your MySQL ends
+- <strong>For Customer View</strong>
+    1. Open bamazonCostumer.js in terminal.
+    2. Update your MySQL password on line 11. 
+    3. Enter node bamazonCustomer.js to see Products Chart.
+    4. Enter the ID (1st column) of the product you wish to purchase. Or type Q to exit.
+    5. Then enter the quantity of products you wish to purchase.
+    6. Next either a purchase confirmation "Product Bought!" or an alert "Not a valid selection!" display.
+    7. After each purchase, you can choose to continue by adding ID # or exit by selecting Q.
+    
+    Notes: Inventory doesnt reflect subtractions after purchases/Im working on it......
 
 - <strong>Manager View</strong>
-    1. Open up terminal
-    2. Use bash command cd to direct to your local repo folder
-    3. In terminal enter node bamazonManager.js
-    4. You will see connected as id in your terminal window to indicate successful connection to MySQL
-    connection.connect(function(err) {
-    if (err) throw err;
-     console.log("connected as id " + connection.threadId); 
-     manage();
-    });
-    5. You will then be prompted 4 options:
-        - View Products
-        - View Low Inventory
-        - Add to Inventory
-        - Add New Products
-    6. View Low Inventory option displays items with quantity < 5
-    7. Add New Products will prompt the user to select a department. Note that this a rawlist so option selection must be done through the number keys.
-    8. After each manage, you can choose to continue or exit by using the up and down arrow keys on your keyboard (exit early with ctrl + c)
-    9. If you select no, connection to your MySQL ends
+    1. Open bamazonManager.js in terminal.
+    2. Update your MySQL password on line 11. 
+    3. Enter node bamazonManager.js
+    4. After a "HELLO MANAGER!" greeting, You will then be prompted with 4 options (use arrow keys to select):
+        - View Products for Sale:
+        This will display the Products Chart.
+
+        - View Low Inventory:
+        This will display products with > 5 stockquantity. 
+
+        - Add to Inventory:
+        Use the arrows to select the product. (Working on this..error after selection).
+
+        - Add New Product:
+        Enter product name, department, price and quantity. A confirmation message listing the above information will diplay (working on reflecting the addition on the product chart).
+
+        - Exit:
+        Select exit to finish.
 
 
 
