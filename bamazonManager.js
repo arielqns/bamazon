@@ -19,13 +19,15 @@ connection.connect(function (err) {
   console.log("*******************");
   promptMan();
 });
+
+//commands
 function promptMan()
 {
     inquirer.prompt([
         {
+            type: "list",
             name: "command",
             message: "/Select an option:",
-            type: "list",
             choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory","Add New Product", "Exit"]
         }
     ]).then(function (choice){
@@ -34,87 +36,93 @@ function promptMan()
                 showItems();
                 break;
             case  "View Low Inventory":
-                showItems();
+                viewLowInv();
                 break;
             case  "Add to Inventory":
-                showItems();
+                addInv();
                 break;
             case  "Add New Product":
-                showItems();
+                addNew();
                 break;
-            case  "Add New Product":
-                showItems();
+            case  "Exit":
+                end();
                 break;
 
         };
     });
 }
-
+//show items
 function showItems() {
     connection.query("SELECT * FROM products", function (err, results) {
         console.log("");
-        for (var i = 0; i < results.length; i++)
+        for (var i = 0; i < results.length; i++) {
             console.log(
                 results[i].itemid +
                 " | " + results[i].productname +
-                " | $" + results[i].price);
+                " | " + results[i].departmentname +
+                " | $" + results[i].price +
+                " | " + results[i].stockquantity);
         }
-        promptMan();
-    };
-
-
+    promptMan();
+    });
+}
+//view low inventory, only < 5 items
 function viewLowInv() {
     connection.query("SELECT * FROM products WHERE stockquantity < 5", function (err, results) {
         console.log("");
         for (var i = 0; i < results.length; i++) {
             console.log(
-                results[i].item_id +
+                results[i].itemid +
                 " | " + results[i].productname +
                 " | " + results[i].stockquantity + " in stock.");
-        }
-        promptMngr();
+        } 
+        promptMan();
     });
 }
-
+//add inventory
 function addInv() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         inquirer.prompt([
             {
+                type: "list",
                 name: "item",
                 message: "\nSelect the product you want to update.",
-                type: "list",
+        
                 choices: function () {
                     var choices = [];
                     for (var i = 0; i < results.length; i++) {
-                        choices.push(results[i].itemid + " | " + results[i].productname)
+                        choices.push(results[i].itemid + " | " + results[i].productname + " | " + results[i].stockquantity + " in stock.")
                     }
                     return choices;
                 }
             }
-        ]).then(function (chosenItem) {
-            var splitItemId = chosenItem.item.split(" ", 1);
-            var quantity = parseInt(splitItemId - 1);
-            inquirer.prompt([{
-                name: "addInv",
-                message: "Enter the amount you want to add.",
-                type: "input",
-                validate: function (value) {
-                    if (parseInt(value) < 0) {
-                        console.log("\nPlease enter a valid input.")
-                        return false;
-                    } else if (parseInt(value) > 0) {
-                        addInvUpdateDb(results, quantity, value, splitItemId);
-                        return true;
-                    }
+        ]).then(function (res) {
+            connection.query("SELECT * FROM products WHERE itemid=?"), [res.addProduct], function(err, res) {
+                if (err) throw err;
+                var currentProd = res[0].productname
+                var updatedQuant = res[0].stockquantity + parseInt(res.quantityIncrease) 
+                connection.query(
+                    "UPDATE products SET ? WHERE ?", [{
+                        stockquantity: updatedQuant
+                    },
+                {
+                    itemid: res.addProduct
                 }
-            }]);
+            ],
+            function(err, res){
+                if (err) throw err;
+                console.log(res.quantityIncrease + " unites has been added to " + currentProd);
+                promptMan();
+            })}
+         
+            
         });
     });
 }
 
 function addNew() {
-    connection.query("SELECT * FROM products", function (err, results) {
+    connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         inquirer.prompt([
             {
@@ -168,29 +176,29 @@ function addNew() {
     });
 }
 
-function addInvUpdateDb(results, quantity, value, splitItemId) {
-    var query = connection.query(
-    "UPDATE products SET ? WHERE ?",
-    [
-    {
-    stockquantity: parseInt(results[quantity].stockquantity) + parseInt(value)
-    },
-    {
-    item_id: splitItemId
-    }
-    ],
-    function (err, res) {
-    var product = " product.\n";
-    if (value > 1) {
-    product = " products.\n";
-    }
-    console.log("");
-    process.stdout.write(results[splitItemId - 1].productname);
-    process.stdout.write(" updated by ");
-    process.stdout.write(value);
-    process.stdout.write(" more");
-    process.stdout.write(product);
-    promptMngr();
-    }
-    );
-   }
+// function addInvUpdateDb(results, quantity, value, splitItemId) {
+//     var query = connection.query(
+//     "UPDATE products SET ? WHERE ?",
+//     [
+//     {
+//     stockquantity: parseInt(results[quantity].stockquantity) + parseInt(value)
+//     },
+//     {
+//     itemid: splitItemId
+//     }
+//     ],
+//     function (err, res) {
+//     var product = " product.\n";
+//     if (value > 1) {
+//     product = " products.\n";
+//     }
+//     console.log("");
+//     process.stdout.write(results[splitItemId - 1].productname);
+//     process.stdout.write(" updated by ");
+//     process.stdout.write(value);
+//     process.stdout.write(" more");
+//     process.stdout.write(product);
+//     promptMan();
+//     }
+//     );
+//    }

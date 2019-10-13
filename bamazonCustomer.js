@@ -14,9 +14,9 @@ var connection = mysql.createConnection({
 // call back 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log("********************");
+  console.log("*******************");
   console.log("WELCOME TO BAMAZON!");
-  console.log("********************");
+  console.log("*******************");
   console.log("Make your selection from the chart below:");
   console.log("-----------------------------------------");
   makeTable();
@@ -60,7 +60,7 @@ var promptCustomer = function (res) {
           }
         }).then(function (answer) {
           if ((res[id].stockquantity - answer.quant) > 0) {
-            connection.query("UPDATE products SET stockquantity='" + (res[id].stockquantity - answer.quant) + "' WHERE productname='" + product + "'", function (err, res2) {
+            connection.query("UPDATE products SET stockquantity='" + (res[id].stockquantity - answer.quant) + "' WHERE productname='" + product + "'", function (err, res) {
               console.log("Product Bought!");
               makeTable();
             })
@@ -77,4 +77,3 @@ var promptCustomer = function (res) {
     }
     
   })}
-
